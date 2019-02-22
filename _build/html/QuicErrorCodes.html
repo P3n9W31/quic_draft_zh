@@ -1,0 +1,249 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>QUIC 错误码 &mdash; QUIC 协议的概念设计和协议规范 1.0.0 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="优先级" href="Priority.html" />
+    <link rel="prev" title="QUIC 传输参数" href="QUIC Transport Parameters.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> QUIC 协议的概念设计和协议规范
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Contributors.html">贡献者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acknowledgments.html">致谢</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conventions and Definitions.html">术语和定义</a></li>
+<li class="toctree-l1"><a class="reference internal" href="A QUIC Overview.html">QUIC 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Packet Types and Formats.html">包类型和格式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Life of a QUIC Connection.html">QUIC 连接的生命周期</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Frame Types and Formats.html">帧类型和格式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QUIC Transport Parameters.html">QUIC 传输参数</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QUIC 错误码</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Priority.html">优先级</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HTTP2 Layering over QUIC.html">建立在QUIC之上的HTTP/2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Handshake Protocol Requirements.html">握手协议条件</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QUIC 协议的概念设计和协议规范</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>QUIC 错误码</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/QuicErrorCodes.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="quic">
+<h1>QUIC 错误码<a class="headerlink" href="#quic" title="永久链接至标题">¶</a></h1>
+<p>QUIC错误码从数值到编码的映射关系，现在在Chromium源码的src/net/quic/quic_protocol.h中定义。
+（TODO: 硬编码的数值在这里添加）</p>
+<ul class="simple">
+<li>QUIC_NO_ERROR: 无错误。这个值对于RST_STREAM帧和CONNECTION_CLOSE帧无效。</li>
+<li>QUIC_STREAM_DATA_AFTER_TERMINATION: 在FIN或者RESET状态之后仍然有数据到达。</li>
+<li>QUIC_SERVER_ERROR_PROCESSING_STREAM: 服务端的错误终止了流数据处理。</li>
+<li>QUIC_MULTIPLE_TERMINATION_OFFSETS: 发送端的单个流收到了两个不匹配的FIN或者RESET偏移。</li>
+<li>QUIC_BAD_APPLICATION_PAYLOAD: 发送端收到了错误的应用层数据。</li>
+<li>QUIC_INVALID_PACKET_HEADER: 发送端收到了异常的包头。</li>
+<li>QUIC_INVALID_FRAME_DATA: 发送端收到一个帧数据，更多的细节的错误码会优先选择。</li>
+<li>QUIC_INVALID_FEC_DATA: 异常的FEC数据。</li>
+<li>QUIC_INVALID_RST_STREAM_DATA: 流RST数据异常。</li>
+<li>QUIC_INVALID_CONNECTION_CLOSE_DATA: 连接关闭数据异常。</li>
+<li>QUIC_INVALID_ACK_DATA: Ack数据异常。</li>
+<li>QUIC_DECRYPTION_FAILURE: 解密错误。</li>
+<li>QUIC_ENCRYPTION_FAILURE: 加密错误。</li>
+<li>QUIC_PACKET_TOO_LARGE: 包大小超过最大值。</li>
+<li>QUIC_PACKET_FOR_NONEXISTENT_STREAM: 数据发送到一个不存在的流。</li>
+<li>QUIC_CLIENT_GOING_AWAY: 客户端关闭(浏览器关闭等)。</li>
+<li>QUIC_SERVER_GOING_AWAY: 服务端关闭(重启等)。</li>
+<li>QUIC_INVALID_STREAM_ID: 无效的流标识符。</li>
+<li>QUIC_TOO_MANY_OPEN_STREAMS: 打开的流过多。</li>
+<li>QUIC_CONNECTION_TIMED_OUT: 我们达到预协商(或者默认)的超时时间。</li>
+<li>QUIC_CRYPTO_TAGS_OUT_OF_ORDER: 握手信息中包含了乱序的标签。</li>
+<li>QUIC_CRYPTO_TOO_MANY_ENTRIES: 握手信息中包含过多的实例。</li>
+<li>QUIC_CRYPTO_INVALID_VALUE_LENGTH: 握手信息中包含无效的长度值。</li>
+<li>QUIC_CRYPTO_MESSAGE_AFTER_HANDSHAKE_COMPLETE: 握手完成后收到一个加密信息。</li>
+<li>QUIC_INVALID_CRYPTO_MESSAGE_TYPE: 接收到一个非法标签的加密信息。</li>
+<li>QUIC_SEQUENCE_NUMBER_LIMIT_REACHED: 传输一个额外包，可能导致包号重用。</li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Priority.html" class="btn btn-neutral float-right" title="优先级" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="QUIC Transport Parameters.html" class="btn btn-neutral float-left" title="QUIC 传输参数" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, ZhanPw
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

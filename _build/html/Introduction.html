@@ -1,0 +1,234 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>介绍 &mdash; QUIC 协议的概念设计和协议规范 1.0.0 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="术语和定义" href="Conventions and Definitions.html" />
+    <link rel="prev" title="致谢" href="Acknowledgments.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> QUIC 协议的概念设计和协议规范
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Contributors.html">贡献者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acknowledgments.html">致谢</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conventions and Definitions.html">术语和定义</a></li>
+<li class="toctree-l1"><a class="reference internal" href="A QUIC Overview.html">QUIC 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Packet Types and Formats.html">包类型和格式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Life of a QUIC Connection.html">QUIC 连接的生命周期</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Frame Types and Formats.html">帧类型和格式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QUIC Transport Parameters.html">QUIC 传输参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QuicErrorCodes.html">QUIC 错误码</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Priority.html">优先级</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HTTP2 Layering over QUIC.html">建立在QUIC之上的HTTP/2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Handshake Protocol Requirements.html">握手协议条件</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QUIC 协议的概念设计和协议规范</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>介绍</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Introduction.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>QUIC (Quick UDP Internet Connection，快速UDP互联网连接) 是一个新的基于UDP的多路复用且安全的传输协议，
+它从头开始设计，且为 HTTP/2 语义做了优化。尽管以 HTTP/2 作为主要的应用协议而构建，
+然而 QUIC 的构建是基于传输和安全领域数十年的经验的，且实现了使它成为有吸引力的现代通用传输协议的机制。
+QUIC提供了等价于HTTP/2 的多路复用和流控，等价于 TLS 的安全机制，及等价于 TCP 的连接语义、可靠性和拥塞控制。</p>
+<p>QUIC完全运行于用户空间，它当前作为 Chromium 浏览器的一部分发布给用户，以便于快速的部署和实验。
+作为基于 UDP 的用户空间传输协议，QUIC 可以做一些由于遗留的客户端和中间设备，
+或旷日持久的操作系统开发和部署周期的阻碍，而被证明很难在现有的协议中部署的创新。</p>
+<p>QUIC 的一个重要目标是通过快速的实验获得更好的传输设计相关的知识。作为结果，我们希望将其中的一些精华的改动迁移进 TCP 和 TLS，
+后者通常有着长得多的迭代周期。</p>
+<p>这份文档描述标准化前 QUIC 协议的概念设计和协议规范。补充资料描述了加密和传输握手 [QUIC-CRYPTO]，
+及丢失恢复和拥塞控制 [draft-iyengar-quic-loss-recovery]。
+其它资源，包括一份更详细的相关文档，可以在 Chromium 的 QUIC 主页 找到。</p>
+<p>基于早期的部署的 QUIC 标准化建议为 [draft-hamilton-quic-transport-protocol]，
+[draft-shade-quic-http2-mapping]，[draft-iyengar-quic-loss-recovery]，
+和 [draft-thomson-quic-tls]。</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Conventions and Definitions.html" class="btn btn-neutral float-right" title="术语和定义" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Acknowledgments.html" class="btn btn-neutral float-left" title="致谢" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, ZhanPw
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

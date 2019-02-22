@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>包类型和格式 &mdash; QUIC 协议的概念设计和协议规范 1.0.0 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="QUIC 连接的生命周期" href="Life of a QUIC Connection.html" />
+    <link rel="prev" title="QUIC 概述" href="A QUIC Overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> QUIC 协议的概念设计和协议规范
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Contributors.html">贡献者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acknowledgments.html">致谢</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conventions and Definitions.html">术语和定义</a></li>
+<li class="toctree-l1"><a class="reference internal" href="A QUIC Overview.html">QUIC 概述</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">包类型和格式</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quic">QUIC公共包头</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">特殊包</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">版本协商包</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">公共复位包</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">普通包</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">帧包</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fec">FEC包</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Life of a QUIC Connection.html">QUIC 连接的生命周期</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Frame Types and Formats.html">帧类型和格式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QUIC Transport Parameters.html">QUIC 传输参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QuicErrorCodes.html">QUIC 错误码</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Priority.html">优先级</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HTTP2 Layering over QUIC.html">建立在QUIC之上的HTTP/2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Handshake Protocol Requirements.html">握手协议条件</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QUIC 协议的概念设计和协议规范</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>包类型和格式</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Packet Types and Formats.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>包类型和格式<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="quic">
+<h2>QUIC公共包头<a class="headerlink" href="#quic" title="永久链接至标题">¶</a></h2>
+<p>传输的所有 QUIC 包以大小介于1至19字节的公共包头开始。公共包头的格式如下：:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>         <span class="mi">1</span>       <span class="mi">2</span>        <span class="mi">3</span>        <span class="mi">4</span>            <span class="mi">8</span>
+<span class="o">+---------+--------+--------+--------+--------+---</span>   <span class="o">---+</span>
+<span class="o">|</span> <span class="n">Public</span>  <span class="o">|</span> <span class="n">Connection</span> <span class="n">ID</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="ow">or</span> <span class="mi">64</span><span class="p">)</span>       <span class="o">...</span>   <span class="o">|</span> <span class="o">-&gt;</span>
+<span class="o">|</span> <span class="n">Flags</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">|</span> <span class="p">(</span><span class="n">variable</span> <span class="n">length</span><span class="p">)</span>                           <span class="o">|</span>
+<span class="o">+---------+--------+--------+--------+--------+---</span>   <span class="o">---+</span>
+
+
+ <span class="mi">9</span>        <span class="mi">10</span>      <span class="mi">11</span>       <span class="mi">12</span>
+<span class="o">+--------+--------+--------+--------+</span>
+<span class="o">|</span>         <span class="n">QUIC</span> <span class="n">Version</span> <span class="p">(</span><span class="mi">32</span><span class="p">)</span>         <span class="o">|</span> <span class="o">-&gt;</span>
+<span class="o">|</span>            <span class="p">(</span><span class="n">optional</span><span class="p">)</span>             <span class="o">|</span>
+<span class="o">+--------+--------+--------+--------+</span>
+
+
+  <span class="mi">13</span> <span class="mi">14</span> <span class="mi">15</span> <span class="mi">16</span> <span class="mi">17</span> <span class="mi">18</span>
+  <span class="o">+--------+--------+--------+--------+--------+--------+</span>
+  <span class="o">|</span> <span class="n">Packet</span> <span class="n">Number</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="ow">or</span> <span class="mi">48</span><span class="p">)</span>                    <span class="o">|</span>
+  <span class="o">|</span> <span class="p">(</span><span class="n">variable</span> <span class="n">length</span><span class="p">)</span>                                   <span class="o">|</span>
+  <span class="o">+--------+--------+--------+--------+--------+--------+</span>
+</pre></div>
+</div>
+<p>载荷可以包含多个如下所述类型相关的头部字节。</p>
+<p>公共头部中的字段如下：</p>
+<ul>
+<li><p class="first">公共标记（Public Flags）：</p>
+<blockquote>
+<div><ul>
+<li><p class="first">0x01 = PUBLIC_FLAG_VERSION。这个标记的含义与包是由服务器还是客户端发送的有关。
+当由客户端发送时，设置它表示头部包含 QUIC 版本 (参考下面的说明)。
+客户端必须在所有的包中设置这个位，直到客户端收到来自服务器的确认，同意所提议的版本。
+服务器通过发送不设置该位的包来表示同意版本。当这个位由服务器设置时，包是版本协商包。
+版本协商在后面更详细地描述。</p>
+</li>
+<li><p class="first">0x02 = PUBLIC_FLAG_RESET。设置来表示包是公共复位包。</p>
+</li>
+<li><p class="first">0x0C处的两个比特指示分组中存在的连接ID的大小。 在所有分组中必须将这些比特设置为0x0C，
+直到给定方向协商更换为一个不同的值（例如，客户端可以请求呈现更少的连接ID字节）。</p>
+<blockquote>
+<div><ul class="simple">
+<li>0x0C 表示连接ID占了8个字节</li>
+<li>0x08 表示连接ID占了4个字节</li>
+<li>0x04 表示连接ID占了1个字节</li>
+<li>0x00  表示连接ID被删除了</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">0x30 处的两位表示每个包中存在的数据包编号的低位字节数。
+这些位只用于帧包。没有包号的公共复位和版本协商包 (由服务器发送) ，
+不使用这些位，且必须被设置为0。这2位的掩码：</p>
+<blockquote>
+<div><ul class="simple">
+<li>0x30 表示包号占用6个字节。</li>
+<li>0x20 表示包号占用4个字节。</li>
+<li>0x10 表示包号占用2个字节。</li>
+<li>0x00 表示包号占用1个字节。</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">0x40 为多路径使用保留。</p>
+</li>
+<li><p class="first">0x80 暂时未使用，且必须被设置为0。</p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">连接ID：这是客户端选择的无符号64位统计随机数，该数字是连接的标识符。由于 QUIC 的连接被设计为，即使客户端漫游，连接依然保持建立状态，
+因而 IP 4元组（源IP，源端口，目标IP，目标端口）可能不足以标识连接。对每个传输方向，当4元组足以标识连接时，连接ID可以省略。</p>
+</li>
+<li><p class="first">QUIC版本：表示 QUIC 协议版本的32位不透明标记。只有在公共标记包含 FLAG_VERSION（比如 public_flags &amp; FLAG_VERSION !=0） 时才存在。
+客户端可以设置这个标记，并 准确 包含一个提议版本，同时包含任意的数据（与该版本一致）。</p>
+<p>当客户端提议的版本不支持时，服务器可以设置这个标记，并可以提供一个可接受版本的列表（0或多个），
+但一定不能(MUST not) 在版本信息之后包含任何数据。最近的实验版本的版本值示例包括 “Q025”，
+它对应于 byte 9 包含 ‘Q”，byte 10 包含 ‘0”，等等。[参考本文末尾的不同版本变化列表。]</p>
+</li>
+<li><p class="first">包号：包号的低 8，16，32，或 48 位，基于公共标记的 FLAG_?BYTE_SEQUENCE_NUMBER 标记被设置为什么。
+每个普通包（与特别的公共复位和版本协商包相反）由发送者分配包号。由某一端发送的首包包号应该为1，后续每个包的包号应该比前一个的大1。</p>
+<p>包号的低64位被用作加密随机数的一部分；然而，QUIC 端点一定不能发送其包号无法以 64 位表示的包。如果 QUIC 端点传输了包号为 (2^64-1) 的包，
+则该包必须包含错误码为 QUIC_SEQUENCE_NUMBER_LIMIT_REACHED 的 CONNECTION_CLOSE 帧，且对端一定不能再传输任何其它包。</p>
+<p>最多传输包号的低48位。要使接收者可以明确的重建包号，QUIC端点一定不能传输一个确认包已知已经由接收者发送的最大包号大 (2^(bitlength-2))
+的包。然而，在途包的数目不能超过 (2^46)。</p>
+<p>任何截断的包号应该被推断为具有最接近但大于传输最初包含了截断包号的包的对端的最大已知包号的值。包号的发送部分匹配推断值的最低位。</p>
+</li>
+</ul>
+<p>公共标记处理流程图如下：:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Check the public flags in public header
+                  |
+                  |
+                  V
+          +--------------+
+          | Public Reset |     YES
+          | flag set?    |---------------&gt; Public Reset Packet
+          +--------------+
+                  |
+                  | NO
+                  V
+          +------------+           +-------------+
+          | Version    | YES       | Packet sent | YES
+          | flag set?  |---------&gt; | by server?  |--------&gt; Version Negotiation
+          +------------+           +-------------+                Packet
+                 |                        |
+                 | NO                     | NO
+                 V                        V
+          Regular Packet         Regular Packet with
+                             QUIC Version present in header
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>特殊包<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id3">
+<h3>版本协商包<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<p>只有服务器会发送版本协商包。版本协商包以8位的公共标记和64位的连接ID开始。
+公共标记必须设置PUBLIC_FLAG_VERSION，并指明64位的连接ID。
+版本协商包的其余部分是服务器支持的版本的4字节列表：:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span>    <span class="mi">0</span>        <span class="mi">1</span>        <span class="mi">2</span>        <span class="mi">3</span>        <span class="mi">4</span>        <span class="mi">5</span>        <span class="mi">6</span>        <span class="mi">7</span>       <span class="mi">8</span>
+<span class="o">+--------+--------+--------+--------+--------+--------+--------+--------+--------+</span>
+<span class="o">|</span> <span class="n">Public</span> <span class="o">|</span>    <span class="n">Connection</span> <span class="n">ID</span> <span class="p">(</span><span class="mi">64</span><span class="p">)</span>                                                 <span class="o">|</span> <span class="o">-&gt;</span>
+<span class="o">|</span><span class="n">Flags</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">|</span>                                                                       <span class="o">|</span>
+<span class="o">+--------+--------+--------+--------+--------+--------+--------+--------+--------+</span>
+
+     <span class="mi">9</span>       <span class="mi">10</span>       <span class="mi">11</span>        <span class="mi">12</span>       <span class="mi">13</span>      <span class="mi">14</span>       <span class="mi">15</span>       <span class="mi">16</span>       <span class="mi">17</span>
+<span class="o">+--------+--------+--------+--------+--------+--------+--------+--------+---...--+</span>
+<span class="o">|</span>      <span class="mi">1</span><span class="n">st</span> <span class="n">QUIC</span> <span class="n">version</span> <span class="n">supported</span>   <span class="o">|</span>     <span class="mi">2</span><span class="n">nd</span> <span class="n">QUIC</span> <span class="n">version</span> <span class="n">supported</span>    <span class="o">|</span>   <span class="o">...</span>
+<span class="o">|</span>      <span class="n">by</span> <span class="n">server</span> <span class="p">(</span><span class="mi">32</span><span class="p">)</span>               <span class="o">|</span>     <span class="n">by</span> <span class="n">server</span> <span class="p">(</span><span class="mi">32</span><span class="p">)</span>                <span class="o">|</span>
+<span class="o">+--------+--------+--------+--------+--------+--------+--------+--------+---...--+</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>公共复位包<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>公共复位包以8位的公共标记和64位的连接ID开始。公共标记必须设置 PUBLIC_FLAG_RESET，并表明64位的连接ID。
+公共复位包的其余部分像标记 PRST 的加密握手消息那样编码（参考[QUIC-CRYPTO]）：:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span>    <span class="mi">0</span>        <span class="mi">1</span>        <span class="mi">2</span>        <span class="mi">3</span>        <span class="mi">4</span>         <span class="mi">8</span>
+<span class="o">+--------+--------+--------+--------+--------+--</span>   <span class="o">--+</span>
+<span class="o">|</span> <span class="n">Public</span> <span class="o">|</span>    <span class="n">Connection</span> <span class="n">ID</span> <span class="p">(</span><span class="mi">64</span><span class="p">)</span>                <span class="o">...</span>  <span class="o">|</span> <span class="o">-&gt;</span>
+<span class="o">|</span><span class="n">Flags</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">|</span>                                           <span class="o">|</span>
+<span class="o">+--------+--------+--------+--------+--------+--</span>   <span class="o">--+</span>
+
+     <span class="mi">9</span>       <span class="mi">10</span>       <span class="mi">11</span>        <span class="mi">12</span>       <span class="mi">13</span>      <span class="mi">14</span>
+<span class="o">+--------+--------+--------+--------+--------+--------+---</span>
+<span class="o">|</span>      <span class="n">Quic</span> <span class="n">Tag</span> <span class="p">(</span><span class="mi">32</span><span class="p">)</span>                <span class="o">|</span>  <span class="n">Tag</span> <span class="n">value</span> <span class="nb">map</span>      <span class="o">...</span> <span class="o">-&gt;</span>
+<span class="o">|</span>         <span class="p">(</span><span class="n">PRST</span><span class="p">)</span>                    <span class="o">|</span>  <span class="p">(</span><span class="n">variable</span> <span class="n">length</span><span class="p">)</span>
+<span class="o">+--------+--------+--------+--------+--------+--------+---</span>
+</pre></div>
+</div>
+<p>标记值映射：标记值映射包含如下的标记值：</p>
+<ul class="simple">
+<li>RNON (public reset nonce proof) - 一个64位的无符号整数。必须。</li>
+<li>RSEQ (rejected packet number) - 一个64位的包号。必须。</li>
+<li>CADR (client address) - 观察到的客户端IP地址和端口号。它当前只被用于调试，因而是可选的。</li>
+</ul>
+<p>(TODO：公共复位包应该包含认证的（目标）服务器 IP/端口。)</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>普通包<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>普通包已经过认证和加密。公共头部已认证但未加密，从第一帧开始的包的其余部分已加密。
+紧随公共头部之后，普通包包含 AEAD（authenticated encryption and associated data）数据。
+要解释内容，这些数据必须先解密。解密之后，明文以私有表头（Private Header）开头。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>        <span class="mi">1</span>
+<span class="o">+---------+---------+</span>
+<span class="o">|</span> <span class="n">Private</span> <span class="o">|</span> <span class="n">FEC</span> <span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Flags</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">|</span> <span class="p">(</span><span class="n">opt</span><span class="p">)</span>   <span class="o">|</span>
+<span class="o">+---------+---------+</span>
+</pre></div>
+</div>
+<p>私有表头中的字段如下：</p>
+<ul>
+<li><p class="first">私有标志</p>
+<blockquote>
+<div><ul class="simple">
+<li>0x01 =  FLAG_ENTROPY - 对于数据分组，表示该分组包含1比特的熵，对于fec分组，包含受保护分组的熵的异或。</li>
+<li>0x02 = FLAG_FEC_GROUP - 表示是否存在fec字节。</li>
+<li>0x04 = FLAG_FEC - 表示该数据包表示FEC数据包。</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">FEC (FEC组编号偏移): FEC组编号是FEC组中第一个数据包的包编号。
+FEC组编号偏移是一个8位无符号值，应从当前数据包的包编号中减去该编号，以产生该包的FEC组编号。
+仅当私有标志包含FLAG_FEC_GROUP时才会出现此情况。
+单个FEC组内的所有数据包必须具有编码为相同字节数的数据包编号（即，数据包编号编码在组中不得更改）</p>
+</li>
+</ul>
+<p>(TODO: 文档化加密和解密的输入，并描述试用解密)</p>
+<div class="section" id="id6">
+<h3>帧包<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>在私人表头的格式之外，帧包具有一个载荷，它是一系列的类型前缀帧。帧类型的格式将在本文档的后面定义，但帧包的通用格式如下：:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+--------+---...---+--------+---...---+</span>
+<span class="o">|</span> <span class="n">Type</span>   <span class="o">|</span> <span class="n">Payload</span> <span class="o">|</span> <span class="n">Type</span>   <span class="o">|</span> <span class="n">Payload</span> <span class="o">|</span>
+<span class="o">+--------+---...---+--------+---...---+</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fec">
+<h3>FEC包<a class="headerlink" href="#fec" title="永久链接至标题">¶</a></h3>
+<p>FEC分组（具有FLAG_FEC集的那些分组）具有载荷：其仅包含FEC组中的每个数据分组的空填充有效载荷的XOR。
+FEC数据包还必须设置FLAG_FEC_GROUP。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+-----...----+</span>
+<span class="o">|</span> <span class="n">Redundancy</span> <span class="o">|</span>
+<span class="o">+-----...----+</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Life of a QUIC Connection.html" class="btn btn-neutral float-right" title="QUIC 连接的生命周期" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="A QUIC Overview.html" class="btn btn-neutral float-left" title="QUIC 概述" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, ZhanPw
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
