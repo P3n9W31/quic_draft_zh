@@ -113,30 +113,8 @@ htmlhelp_basename = 'quic_doc_zhdoc'
 
 # -- Options for LaTeX output ------------------------------------------------
 
-# latex_elements = {
-#     # The paper size ('letterpaper' or 'a4paper').
-#     #
-#     # 'papersize': 'letterpaper',
-#
-#     # The font size ('10pt', '11pt' or '12pt').
-#     #
-#     # 'pointsize': '10pt',
-#
-#     # Additional stuff for the LaTeX preamble.
-#     #
-#     # 'preamble': '',
-#
-#     # Latex figure (float) alignment
-#     #
-#     # 'figure_align': 'htbp',
-# }
 if on_rtd:
     latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #'papersize': 'letterpaper',
-    # The font size ('10pt', '11pt' or '12pt').
-    #'pointsize': '10pt',
-    # Additional stuff for the LaTeX preamble.
     'preamble': r'''
     \hypersetup{unicode=true}
     \usepackage{CJKutf8}
@@ -165,15 +143,6 @@ else:
         ''',
     }
 
-# latex_elements = {
-#     'papersize': 'a4paper',  # The font size ('10pt', '11pt' or '12pt').
-#     'pointsize': '12pt', 'classoptions': ',oneside', 'babel': '',  # 必須
-#     'inputenc': '',
-#     'utf8extra': '',
-#     'preamble': r"""
-# \usepackage{xeCJK}
-# \usepackage{indentfirst}
-# """}
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
